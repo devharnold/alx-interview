@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from typing import List
-from collections import Queue
+from collections import Queue, deque
 
 """
 -- n number of locked boxes 
@@ -23,9 +23,13 @@ def canUnlockAll(boxes):
     n = len(boxes)
     visited = [False] * n
     visited[0] = True
-    queue = dequeue([0])
+    queue = deque([0])
 
     while queue:
         current_box = queue.popleft()
         keys = boxes[current_box]
-    
+        for boxes in queue.len(boxes):
+            if current_box not in visited:
+                visited.add(boxes)
+                queue.enqueue(boxes)
+        return boxes
