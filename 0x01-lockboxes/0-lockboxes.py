@@ -21,15 +21,15 @@ from collections import Queue, deque
 
 def canUnlockAll(boxes):
     n = len(boxes)
-    visited = [False] * n
-    visited[0] = True
-    queue = deque([0])
+    visited_boxes = set([0])
+    unvisited_boxes = set([0]).difference(set([0]))
 
-    while queue:
-        current_box = queue.popleft()
-        keys = boxes[current_box]
-        for boxes in queue.len(boxes):
-            if current_box not in visited:
-                visited.add(boxes)
-                queue.enqueue(boxes)
-        return boxes
+
+    while len(unvisited_boxes) > 0:
+        boxIdx = unvisited_boxes.pop()
+        if not boxIdx or boxIdx >= n or boxIdx < 0:
+            continue
+        if boxIdx not in visited_boxes:
+            unvisited_boxes = unvisited_boxes.union(boxes[boxIdx])
+            visited_boxes.add(boxIdx)
+    return n == len(visited_boxes)
