@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-from typing import List
-from collections import Queue, deque
 
 """
 -- n number of locked boxes 
