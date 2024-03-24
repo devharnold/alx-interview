@@ -5,24 +5,32 @@ minOperations module
 """
 
 def minOperations(n):
-    """A single character H
-    Text editor can only execute two operations in this file
-    `Copy All` and `Paste`
-    Given a number n, a method that calculates fewest number of
-    operations needed to result in exactly n H characters in the file
-    """
-    if n == 0:
-        return 0
+    """function that computes the fewest number of ops
+    to result in exactly n H characters.
     
-    min_op = 0
-    while n % 2 == 0:
-        min_op += 1
-        n // 2
+    Args:
+    n (int): The desired number of H characters.
+    Returns:
+    int: The fewest number of ops needed
+    """
+    if not isinstance(n, int):
+        return 0
+    #set op_count => `operations_count` to 0
+    op_count = 0
+    clipboard = 0
+    done = 1
 
-    if n > 1:
-        option1 = 1 + minOperations(n - 1)
-        option2 == 0
-        if n % 3 == 0:
-            option2 = 1 + minOperations(n // 3)
-        min_op += min(option1, option2)
-    return min_op
+    for done in range(1, n + 1):
+        if clipboard == 0:
+            clipboard = done
+            op_count += 2
+        elif n - done > 0 and (n - done) % done == 0:
+            clipboard = done
+            op_count += 2
+        elif clipboard > 0:
+            op_count += 1
+    return op_count
+
+
+
+print(minOperations(3))
