@@ -13,7 +13,7 @@ def minOperations(n):
     Returns:
     int: The fewest number of ops needed
     """
-    if not isinstance(n, int) or n < 1:
+    if not isinstance(n, int):
         return 0
     #set op_count => `operations_count` to 0
     op_count = 0
@@ -23,12 +23,14 @@ def minOperations(n):
     while done < n:
         if clipboard == 0:
             clipboard = done
-            op_count += 2
-            done += clipboard 
+            done += clipboard
+            op_count += 2 
         elif n - done > 0 and (n - done) % done == 0:
             clipboard = done
-            op_count += 2
             done += clipboard 
+            op_count += 2
         elif clipboard > 0:
+            done += clipboard
             op_count += 1
     return op_count
+
