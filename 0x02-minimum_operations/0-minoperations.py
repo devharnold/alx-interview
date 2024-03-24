@@ -32,7 +32,3 @@ def minOperations(n):
         elif clipboard > 0:
             op_count += 1
     return op_count
-
-
-
-print(minOperations(3))
