@@ -16,7 +16,7 @@ def minOperations(n):
     if not isinstance(n, int):
         return 0
     #set op_count => `operations_count` to 0
-    op_count = 0
+    ops_count = 0
     clipboard = 0
     done = 1
 
@@ -24,13 +24,13 @@ def minOperations(n):
         if clipboard == 0:
             clipboard = done
             done += clipboard
-            op_count += 2 
+            ops_count += 2 
         elif n - done > 0 and (n - done) % done == 0:
             clipboard = done
             done += clipboard 
-            op_count += 2
+            ops_count += 2
         elif clipboard > 0:
             done += clipboard
-            op_count += 1
-    return op_count
+            ops_count += 1
+    return ops_count
 
