@@ -11,9 +11,18 @@ def minOperations(n):
     Given a number n, a method that calculates fewest number of
     operations needed to result in exactly n H characters in the file
     """
-    if n <= 1:
+    if n == 0:
         return 0
-    for i in range(2, n + 1):
-        if n % i == 0:
-            return minOperations(n // i) + i
-    return n
+    
+    min_op = 0
+    while n % 2 == 0:
+        min_op += 1
+        n // 2
+
+    if n > 1:
+        option1 = 1 + minOperations(n - 1)
+        option2 == 0
+        if n % 3 == 0:
+            option2 = 1 + minOperations(n // 3)
+        min_op += min(option1, option2)
+    return min_op
