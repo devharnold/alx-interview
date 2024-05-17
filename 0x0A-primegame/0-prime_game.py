@@ -4,32 +4,22 @@ def isWinner(x, nums):
     """Prime Game"""
     if not nums or x < 1:
         return None
+    
+    marias_wins, bens_wins = 0, 0
 
     n = max(nums)
-    sieve = [True for _ in range(n + 1)]
-    sieve[0] = sieve[1] = False
-    for i in range(2, int(n ** 0.5) + 1):
-        if sieve[i]:
-            for j in range(i * i, n + 1, i):
-                sieve[j] = False
+    primes = [True for _ in range(1, n + 1, 1)]
+    primes[0] = False
+    for i, is_prime in enumerate(primes, 1):
+        if i == 1 or not is_prime:
+            continue
+        for j in range(i + i, n + 1, i):
+            primes[j - 1] = False
 
-    primes = []
-    c = 0
-    for i in range(len(sieve)):
-        if sieve[i]:
-            c += 1
-        primes.append(c)
-
-    players = {"Maria": 0, "Ben": 0}
-    for i in range(len(nums)):
-        c = primes[nums[i]]
-        if c % 2 == 0:
-            players["Maria"] += 1
-        else:
-            players["Ben"] += 1
-
-    if players["Maria"] > players["Ben"]:
-        return "Maria"
-    if players["Maria"] < players["Ben"]:
-        return "Ben"
-    return None
+    for _, n in zip(range(x), nums):
+        primes_count = len(list(filter(lambda x: x, primes[0: n])))
+        bens_wins += primes_count % 2 == 0
+        marias_wins += primes_count % 2 == 1
+    if marias_wins == bens_wins:
+        return None
+    return 'Maria' if marias_wins > bens_wins else 'Ben'
