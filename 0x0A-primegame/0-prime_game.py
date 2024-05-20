@@ -1,25 +1,28 @@
 #!/usr/bin/python3
 
 def isWinner(x, nums):
-    """Prime Game"""
     if not nums or x < 1:
         return None
-
-    marias_wins, bens_wins = 0, 0 #Initialize marias_wins && bens_wins to 0
-
     n = max(nums)
-    primes = [True for _ in range(1, n + 1, 1)]
-    primes[0] = False
-    for i, is_prime in enumerate(primes, 1):
-        if i == 1 or not is_prime:
-            continue
-        for j in range(i + i, n + 1, i):
-            primes[j - 1] = False
-
-    for _, n in zip(range(x), nums):
-        primes_count = len(list(filter(lambda x: x, primes[0: n])))
-        bens_wins += primes_count % 2 == 0
-        marias_wins += primes_count % 2 == 1
-    if marias_wins == bens_wins:
+    prime = [True for i in range(max(n + 1, 2))]
+    p = 2
+    while p * p <= n:
+        if prime[p] == True:
+            for i in range(p * p, n + 1, p):
+                prime[i] = False
+        p += 1
+    prime[0] = False
+    prime[1] = False
+    c = 0
+    for i in range(len(prime)):
+        if prime[i]:
+            c += 1
+        prime[i] = c
+    c = 0
+    for n in nums:
+        c += prime[n] % 2 == 0
+    if c * 2 == len(nums):
         return None
-    return 'Maria' if marias_wins > bens_wins else 'Ben'
+    if c * 2 > len(nums):
+        return "Maria"
+    return "Ben"
