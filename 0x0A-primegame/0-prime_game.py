@@ -4,8 +4,8 @@ def isWinner(x, nums):
     """Prime Game"""
     if not nums or x < 1:
         return None
-    
-    marias_wins, bens_wins = 0, 0
+
+    marias_wins, bens_wins = 0, 0 #Initialize marias_wins && bens_wins to 0
 
     n = max(nums)
     primes = [True for _ in range(1, n + 1, 1)]
